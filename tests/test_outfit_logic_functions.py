@@ -1,4 +1,4 @@
-from unittest.mock import Mock, patch
+from unittest.mock import MagicMock, patch
 
 import easy_outfit.functions
 from easy_outfit.functions import recommend_outfit
@@ -8,7 +8,7 @@ def test_recommend_outfit():
     """Verify that the expected outfit is selected based on the max temperature."""
 
     # for temp >= 70, we expect shorts and a T-shirt
-    easy_outfit.functions.get_max_temp = Mock(return_value=85)
+    easy_outfit.functions.get_max_temp = MagicMock(return_value=85)
     result = recommend_outfit()
     expected_result = {
         "top": "T-shirt",
@@ -18,7 +18,7 @@ def test_recommend_outfit():
     assert result == expected_result
 
     # for 70 > temp >= 45, we expect pants instead of shorts and adding a coat
-    easy_outfit.functions.get_max_temp = Mock(return_value=60)
+    easy_outfit.functions.get_max_temp = MagicMock(return_value=60)
     result = recommend_outfit()
     expected_result = {
         "top": "T-shirt",
@@ -28,7 +28,7 @@ def test_recommend_outfit():
     assert result == expected_result
 
     # for temp < 45, we expect pants instead of shorts and adding a coat
-    easy_outfit.functions.get_max_temp = Mock(return_value=35)
+    easy_outfit.functions.get_max_temp = MagicMock(return_value=35)
     result = recommend_outfit()
     expected_result = {
         "top": "T-shirt",

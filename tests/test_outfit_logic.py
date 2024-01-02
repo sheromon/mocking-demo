@@ -1,29 +1,14 @@
-from unittest.mock import Mock, patch
+from unittest.mock import MagicMock, patch
 
 from easy_outfit.classes import OutfitPicker
 
-
-# def test_recommend_outfit_function_called():
-#     mock = Mock(return_value={"ok": False})
-#     with patch('requests.get', mock):
-#         result = recommend_outfit()
-#         assert requests.get.assert_called_once_with(
-#             "https://api-v3.mbta.com/predictions",
-#             {"filter[stop]": 70067},
-#         )
-
-# def test_recommend_outfit_function():
-#     mock = Mock(return_value=35)
-#     with patch('mbta.time_check.get_max_temp', mock):
-#         result = recommend_outfit()
-#         assert result == 300
 
 def test_recommend_outfit():
     """Verify that the expected outfit is selected based on the max temperature."""
     outfitter = OutfitPicker()
 
     # for temp >= 70, we expect shorts and a T-shirt
-    outfitter.get_max_temp = Mock(return_value=85)
+    outfitter.get_max_temp = MagicMock(return_value=85)
     result = outfitter.recommend_outfit()
     expected_result = {
         "top": "T-shirt",
@@ -33,7 +18,7 @@ def test_recommend_outfit():
     assert result == expected_result
 
     # for 70 > temp >= 45, we expect pants instead of shorts and adding a coat
-    outfitter.get_max_temp = Mock(return_value=60)
+    outfitter.get_max_temp = MagicMock(return_value=60)
     result = outfitter.recommend_outfit()
     expected_result = {
         "top": "T-shirt",
@@ -43,7 +28,7 @@ def test_recommend_outfit():
     assert result == expected_result
 
     # for temp < 45, we expect pants instead of shorts and adding a coat
-    outfitter.get_max_temp = Mock(return_value=35)
+    outfitter.get_max_temp = MagicMock(return_value=35)
     result = outfitter.recommend_outfit()
     expected_result = {
         "top": "T-shirt",
