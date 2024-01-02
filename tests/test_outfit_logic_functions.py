@@ -38,7 +38,19 @@ def test_recommend_outfit():
     assert result == expected_result
 
 
-### Insert patch decorator to give the expected result
+def test_recommend_outfit_context_manager():
+    mock = Mock(return_value=35)
+    with patch('easy_outfit.functions.get_max_temp', mock):
+        result = recommend_outfit()
+    expected_result = {
+        "top": "T-shirt",
+        "bottom": "pants",
+        "other": "coat",
+    }
+    assert result == expected_result
+
+
+@patch('easy_outfit.functions.get_max_temp', Mock(return_value=35))
 def test_recommend_outfit_decorator():
     result = recommend_outfit()
     expected_result = {
@@ -49,20 +61,9 @@ def test_recommend_outfit_decorator():
     assert result == expected_result
 
 
-### Insert patch.object decorator to give the expected result
+@patch.object(easy_outfit.functions, 'get_max_temp', Mock(return_value=35))
 def test_recommend_outfit_decorator_object():
     result = recommend_outfit()
-    expected_result = {
-        "top": "T-shirt",
-        "bottom": "pants",
-        "other": "coat",
-    }
-    assert result == expected_result
-
-
-def test_recommend_outfit_context_manager():
-    ### Insert code to use a context manager to run the recommend_outfit method
-    # and get the expected result
     expected_result = {
         "top": "T-shirt",
         "bottom": "pants",
