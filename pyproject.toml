@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "outfit-picker"
+version = "0.1.0"
+requires-python = ">= 3.8"
+dependencies = [
+    "numpy",
+    "openmeteo-requests",
+]
+authors = [
+  {name = "Cheryl Danner", email = "sheromon@users.noreply.github.com"},
+]
+description = "A toy project for experimenting with testing"
+readme = "README.md"
+license = {text = "MIT License"}
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests"
+]
