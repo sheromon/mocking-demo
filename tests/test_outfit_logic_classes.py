@@ -1,6 +1,6 @@
 from unittest.mock import MagicMock, patch
 
-from easy_outfit.classes import OutfitPicker
+from outfit_picker.classes import OutfitPicker
 
 
 def test_recommend_outfit():

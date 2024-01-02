@@ -1,7 +1,7 @@
 import io
 from unittest.mock import patch
 
-from easy_outfit.classes import OutfitPicker
+from outfit_picker.classes import OutfitPicker
 
 
 @patch("sys.stdout", new_callable=io.StringIO)
