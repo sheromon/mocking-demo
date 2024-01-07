@@ -1,6 +1,8 @@
 import io
 from unittest.mock import patch
 
+import requests
+
 from outfit_picker.classes import OutfitPicker
 
 
