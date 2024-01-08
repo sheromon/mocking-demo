@@ -38,18 +38,6 @@ def test_recommend_outfit():
     assert result == expected_result
 
 
-def test_recommend_outfit_context_manager():
-    mock = MagicMock(return_value=35)
-    with patch('outfit_picker.functions.get_max_temp', mock):
-        result = recommend_outfit()
-    expected_result = {
-        "top": "T-shirt",
-        "bottom": "pants",
-        "other": "coat",
-    }
-    assert result == expected_result
-
-
 @patch('outfit_picker.functions.get_max_temp', MagicMock(return_value=35))
 def test_recommend_outfit_decorator():
     result = recommend_outfit()
@@ -64,6 +52,18 @@ def test_recommend_outfit_decorator():
 @patch.object(outfit_picker.functions, 'get_max_temp', MagicMock(return_value=35))
 def test_recommend_outfit_decorator_object():
     result = recommend_outfit()
+    expected_result = {
+        "top": "T-shirt",
+        "bottom": "pants",
+        "other": "coat",
+    }
+    assert result == expected_result
+
+
+def test_recommend_outfit_context_manager():
+    mock = MagicMock(return_value=35)
+    with patch('outfit_picker.functions.get_max_temp', mock):
+        result = recommend_outfit()
     expected_result = {
         "top": "T-shirt",
         "bottom": "pants",
